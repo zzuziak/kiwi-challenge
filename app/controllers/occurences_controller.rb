@@ -1,0 +1,4 @@
+class OccurencesController < ApplicationController
+
+  
+end

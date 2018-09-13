@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-09-13
+  device_status: MyString
+  device_type: MyString
+  report: one
+  device: one
+
+two:
+  date: 2018-09-13
+  device_status: MyString
+  device_type: MyString
+  report: two
+  device: two
