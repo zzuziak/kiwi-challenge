@@ -1,0 +1,32 @@
+
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= link_to "Devices per day", occurences_path, class: "btn btn-primary text-center" %>
+      <br><br>
+      <h1>Select the device type & status</h1>
+
+      <%= form_tag(overview_occurences_path, method: :get, class:"form-group") do %>
+      <h3>Type
+        <%= select_tag :type, options_for_select([["gateway", "gateway"], ["sensor", "sensor"]]), class: "form-control" %></h3>
+        <h3>Status
+          <%= select_tag :status,  options_for_select([["online", "online"], ["offline", "offline"]]), class: "form-control" %></h3>
+          <%= submit_tag "Search" %>
+          <% end %>
+
+          <% if params[:type].present? && params[:status] %>
+            <table>
+              <th>date</th>
+              <th>devices</th>
+              <% @days.each do |day| %>
+                <tr>
+                  <td><%= day[0] %></td>
+                  <td><%= day[1] %></td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+        </div>
+      </div>
+    </div>

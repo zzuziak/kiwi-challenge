@@ -1,0 +1,35 @@
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= link_to "Stats per device type & status", overview_occurences_path, class: "btn btn-primary text-center" %>
+      <br>
+      <br>
+      <h1>Select a day</h1>
+      <%= form_tag(occurences_path, method: :get, class:"form-group") do %>
+        <%= date_field_tag :report_date, params[:report_date], placeholder: "Report date", class: "form-control" %>
+        <%= submit_tag "Search", class: "btn btn-danger form-control" %>
+      <% end %>
+
+      <ol>
+        <% if @counts %>
+          <% @counts.each do |occurence| %>
+            <% d = params[:report_date].split("-") %>
+            <li>
+              <h3><%= Occurence.find { |o| o.device_id == occurence[0] }.device_type %></h3>
+              <p> id: <%= occurence[0] %>, usage: <%= occurence[1] %></p>
+              <% prev_week = Occurence.select { |o| o.device_id == occurence[0] && o.date == Date.new(d[0].to_i, d[1].to_i, d[2].to_i).prev_day(7) } %>
+              <% if prev_week.count == 0 %>
+                vs previous week: no usage week before
+              <% else %>
+                <% diff = (((occurence[1].to_f / prev_week.count) - 1) * 100).round %>
+                vs previous week: <%= diff > 0 ? "+ #{diff}" : "#{diff}" %> %
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</div>

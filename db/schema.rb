@@ -12,23 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2018_09_13_082406) do
 
-  create_table "devices", force: :cascade do |t|
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "occurences", force: :cascade do |t|
     t.date "date"
     t.string "device_status"
     t.string "device_type"
     t.string "device_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
